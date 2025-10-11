@@ -4,11 +4,11 @@ FROM n8nio/n8n:latest
 # Tentukan direktori kerja
 WORKDIR /home/node
 
-# Atur permission supaya aman
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+# Salin semua file (kalau tidak ada .env, Render akan lewati otomatis)
+COPY . .
 
 # Ekspos port default n8n
 EXPOSE 5678
 
 # Jalankan n8n
-ENTRYPOINT ["tini", "--", "n8n"]
+CMD ["n8n", "start"]
