@@ -1,13 +1,13 @@
-# Gunakan image resmi n8n
+# Gunakan image resmi n8n dari Docker Hub
 FROM n8nio/n8n:latest
 
-# Set working directory
+# Tentukan direktori kerja
 WORKDIR /home/node/
 
-# Copy file .env jika ada
+# Salin file lingkungan jika ada
 COPY . .
 
-# Expose port n8n
+# Tentukan port
 EXPOSE 5678
 
 # Jalankan n8n
