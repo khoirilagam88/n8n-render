@@ -1,0 +1,7 @@
+N8N_ENCRYPTION_KEY=isi_kuncimu_yang_rahasia
+N8N_BASIC_AUTH_USER=admin
+N8N_BASIC_AUTH_PASSWORD=passkuat
+WEBHOOK_URL=https://n8n-username.onrender.com/
+GENERIC_TIMEZONE=Asia/Jakarta
+EXECUTIONS_PROCESS=main
+N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
