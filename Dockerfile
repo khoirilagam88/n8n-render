@@ -1,11 +1,14 @@
-# Gunakan image resmi n8n dari Docker Hub
+# Gunakan image resmi n8n
 FROM n8nio/n8n:latest
 
-# Set timezone
-ENV GENERIC_TIMEZONE=Asia/Jakarta
+# Tentukan direktori kerja
+WORKDIR /home/node
 
-# Tentukan port default n8n
+# Pastikan semua environment file (jika ada) tersalin
+COPY .env /home/node/.env
+
+# Ekspos port default n8n
 EXPOSE 5678
 
 # Jalankan n8n
-CMD ["n8n"]
+ENTRYPOINT ["tini", "--", "n8n"]
