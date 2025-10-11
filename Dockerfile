@@ -4,10 +4,16 @@ FROM n8nio/n8n:latest
 # Tentukan direktori kerja
 WORKDIR /home/node
 
-# Salin semua file (kalau tidak ada .env, Render akan lewati otomatis)
+# Salin semua file
 COPY . .
 
-# Ekspos port default n8n
+# Pastikan folder konfigurasi ada
+RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node
+
+# Jalankan n8n dengan user default
+USER node
+
+# Ekspos port default
 EXPOSE 5678
 
 # Jalankan n8n
