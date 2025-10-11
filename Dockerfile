@@ -4,7 +4,8 @@ FROM n8nio/n8n:latest
 # Tentukan direktori kerja
 WORKDIR /home/node
 
-# Pastikan semua environment file (jika ada) tersalin
+# Atur permission supaya aman
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 # Ekspos port default n8n
 EXPOSE 5678
