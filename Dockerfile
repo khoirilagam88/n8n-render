@@ -5,7 +5,6 @@ FROM n8nio/n8n:latest
 WORKDIR /home/node
 
 # Pastikan semua environment file (jika ada) tersalin
-COPY .env /home/node/.env
 
 # Ekspos port default n8n
 EXPOSE 5678
