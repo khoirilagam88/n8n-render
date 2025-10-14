@@ -1,12 +1,45 @@
-version: "3.8"
-
 services:
-  n8n:
-    image: n8nio/n8n:latest
-    ports:
-      - "5678:5678"
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - ./data:/home/node/.n8n
+  - type: web
+    name: n8n-khoiril
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: "khoiril"
+      - key: N8N_BASIC_AUTH_PASSWORD
+        value: "rahasiaKuat123"
+      - key: N8N_HOST
+        value: "0.0.0.0"
+      - key: N8N_PORT
+        value: "5678"
+      - key: WEBHOOK_TUNNEL_URL
+        value: "https://n8n-khoiril.onrender.com"
+      - key: DB_TYPE
+        value: "postgresdb"
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase:
+          name: n8n-db
+          property: database
+      - key: DB_POSTGRESDB_HOST
+        fromDatabase:
+          name: n8n-db
+          property: host
+      - key: DB_POSTGRESDB_PORT
+        fromDatabase:
+          name: n8n-db
+          property: port
+      - key: DB_POSTGRESDB_USER
+        fromDatabase:
+          name: n8n-db
+          property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase:
+          name: n8n-db
+          property: password
+
+databases:
+  - name: n8n-db
+    plan: free
