@@ -3,26 +3,15 @@ services:
     name: n8n-khoiril
     env: docker
     plan: free
+    region: singapore
     autoDeploy: true
+    buildCommand: ""
+    startCommand: "n8n start"
     envVars:
-      - key: N8N_BASIC_AUTH_ACTIVE
-        value: "true"
-      - key: N8N_BASIC_AUTH_USER
-        value: "khoiril"
-      - key: N8N_BASIC_AUTH_PASSWORD
-        value: "rahasiaKuat123"
-      - key: N8N_HOST
-        value: "0.0.0.0"
-      - key: N8N_PORT
-        value: "5678"
-      - key: WEBHOOK_TUNNEL_URL
-        value: "https://n8n-khoiril.onrender.com"
+      - key: N8N_ENCRYPTION_KEY
+        value: bQbA$:{BD%hFqhZ
       - key: DB_TYPE
         value: "postgresdb"
-      - key: DB_POSTGRESDB_DATABASE
-        fromDatabase:
-          name: n8n-db
-          property: database
       - key: DB_POSTGRESDB_HOST
         fromDatabase:
           name: n8n-db
@@ -31,6 +20,10 @@ services:
         fromDatabase:
           name: n8n-db
           property: port
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase:
+          name: n8n-db
+          property: database
       - key: DB_POSTGRESDB_USER
         fromDatabase:
           name: n8n-db
@@ -39,7 +32,14 @@ services:
         fromDatabase:
           name: n8n-db
           property: password
-
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: "admin"
+      - key: N8N_BASIC_AUTH_PASSWORD
+        value: "admin123"
+      - key: EXECUTIONS_PROCESS
+        value: "main"
 databases:
   - name: n8n-db
     plan: free
