@@ -1,12 +1,19 @@
 # Gunakan image resmi n8n
 FROM n8nio/n8n:latest
 
-# Set direktori data n8n
+# Tentukan working directory
+WORKDIR /home/node
+
+# Set environment variable penting
 ENV N8N_PATH=/home/node/.n8n
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+ENV N8N_RUNNERS_ENABLED=true
+ENV N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+ENV N8N_GIT_NODE_DISABLE_BARE_REPOS=true
 
-# Expose port default
+# Expose port 5678 (port default n8n)
 EXPOSE 5678
 
 # Jalankan n8n
+ENTRYPOINT ["tini", "--"]
 CMD ["n8n", "start"]
