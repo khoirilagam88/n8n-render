@@ -1,8 +1,9 @@
-# Gunakan image resmi dari n8n
-FROM n8nio/n8n:latest
-
-# Tentukan port default
-ENV PORT=5678
-
-# Jalankan n8n secara langsung
-CMD ["n8n", "start"]
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=secret
