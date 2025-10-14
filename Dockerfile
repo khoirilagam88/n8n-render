@@ -1,23 +1,19 @@
 # Gunakan image resmi n8n
 FROM n8nio/n8n:latest
 
-# Set direktori kerja
-WORKDIR /home/node
+# Tambah git dan jq untuk restore otomatis
+RUN apt-get update && apt-get install -y git jq && apt-get clean
 
-# Environment variable penting & stabil
+# Direktori data
 ENV N8N_PATH=/home/node/.n8n
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-ENV N8N_RUNNERS_ENABLED=false
-ENV N8N_BLOCK_ENV_ACCESS_IN_NODE=false
-ENV N8N_GIT_NODE_DISABLE_BARE_REPOS=true
-ENV DB_SQLITE_POOL_SIZE=5
-ENV NODE_ENV=production
-ENV GENERIC_TIMEZONE=Asia/Jakarta
-ENV N8N_EDITOR_BASE_URL=https://n8n-render.onrender.com
+ENV N8N_BASIC_AUTH_ACTIVE=true
+ENV N8N_BASIC_AUTH_USER=admin
+ENV N8N_BASIC_AUTH_PASSWORD=admin123
 
-# Expose port n8n
-EXPOSE 5678
+# Copy workflow backup dari repo (kalau ada)
+COPY .n8n_backup/workflows.json /home/node/.n8n/workflows.json
 
-# Jalankan n8n dengan tini (init process)
-ENTRYPOINT ["tini", "--"]
-CMD ["n8n", "start"]
+# Jalankan n8n
+CMD ["sh", "-c", "if [ -f /home/node/.n8n/workflows.json ]; then \
+  n8n import:workflow --input=/home/node/.n8n/workflows.json; fi && n8n start"]
