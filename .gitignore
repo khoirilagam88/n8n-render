@@ -1,12 +1,6 @@
-# Backup folder
+# Backup lokal dan database
 .n8n_backup/
-
-# Local database
 database.sqlite
 database_backup.sqlite
-
-# Logs
-*.log
-
-# API keys
-api_keys.json
+n8nEventLog*.log
+config
