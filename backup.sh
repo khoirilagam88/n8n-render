@@ -1,10 +1,21 @@
 #!/bin/sh
-set -e
+# Backup otomatis database & config sebelum n8n start
 
-BACKUP_PATH="/home/node/.n8n_backup"
-mkdir -p "$BACKUP_PATH"
+# Waktu backup
+TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
-echo "Starting n8n workflow backup..."
-# Export semua workflow ke file JSON
-n8n export:workflow --all --output="$BACKUP_PATH/workflows.json" || true
-echo "Backup complete: $BACKUP_PATH/workflows.json"
+# Folder backup
+BACKUP_DIR="/home/node/.n8n_backup"
+mkdir -p $BACKUP_DIR
+
+# Backup database jika ada
+if [ -f "/home/node/.n8n/database.sqlite" ]; then
+    cp /home/node/.n8n/database.sqlite $BACKUP_DIR/database_$TIMESTAMP.sqlite
+fi
+
+# Backup config jika ada
+if [ -f "/home/node/.n8n/config" ]; then
+    cp /home/node/.n8n/config $BACKUP_DIR/config_$TIMESTAMP
+fi
+
+echo "Backup selesai: $TIMESTAMP"
