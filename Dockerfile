@@ -10,7 +10,7 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 ENV DB_SQLITE_POOL_SIZE=2
 ENV N8N_LOG_LEVEL=info
 
-# Salin script backup dan beri permission
+# Salin script backup ke container
 COPY backup.sh /home/node/backup.sh
 RUN chmod +x /home/node/backup.sh
 
