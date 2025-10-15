@@ -7,16 +7,17 @@ WORKDIR /home/node/.n8n
 # Install n8n global versi stabil
 RUN npm install -g n8n@1.115.3
 
-# Pasang utilitas
+# Pasang utilitas tambahan
 USER root
 RUN apt-get update && apt-get install -y curl git && rm -rf /var/lib/apt/lists/*
 
-# Copy file backup (kalau ada)
-COPY backup.sh . || true
-COPY .gitignore . || true
+# Copy file backup.sh dan .gitignore jika ada
+# Jika file tidak ada, abaikan error dengan menggunakan multi-stage conditional
+ONBUILD COPY backup.sh ./
+ONBUILD COPY .gitignore ./
 
 # Set permission folder
-RUN chmod 700 /home/node/.n8n && \
+RUN chmod 700 /home/node/.n8n || true && \
     chmod +x backup.sh || true
 
 # Environment default
@@ -32,7 +33,10 @@ ENV N8N_RUNNERS_ENABLED=true
 ENV DB_TYPE=postgresdb
 ENV DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=false
 
-# Jalankan auto-backup (fix command) + start n8n
+# Expose port
+EXPOSE 5678
+
+# Jalankan auto-backup + start n8n
 CMD sh -c 'echo "📦 Running backup (if any)..."; \
     n8n export:workflow --all --output=/home/node/.n8n_backup/workflows.json || echo "No workflows found"; \
     echo "🚀 Starting n8n..."; \
