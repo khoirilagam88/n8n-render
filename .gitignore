@@ -1,0 +1,17 @@
+@"
+# Backup dan folder lokal n8n
+.n8n_backup/
+binaryData/
+nodes/
+ssh/
+
+# File sensitif
+api_keys.json
+config
+env
+database.sqlite
+database_backup.sqlite
+
+# Log
+n8nEventLog*.log
+"@ | Set-Content -Path .gitignore
