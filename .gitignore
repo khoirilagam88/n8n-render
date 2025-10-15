@@ -1,5 +1,6 @@
-# Abaikan folder backup dan file sensitif
+node_modules/
 .n8n_backup/
-config/
-api_keys.json
-nodes/
+database.sqlite
+database_backup.sqlite
+n8nEventLog*.log
+config
