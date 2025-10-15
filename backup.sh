@@ -6,7 +6,7 @@ mkdir -p "$BACKUP_PATH"
 
 echo "[DEBUG] Backup script starting at $(date)..."
 
-# Backup semua workflow aktif
+# Backup semua workflow aktif, jangan exit kalau gagal
 if n8n export:workflow --all --output="$BACKUP_PATH/workflows.json"; then
     echo "[DEBUG] Backup completed successfully: $BACKUP_PATH/workflows.json"
 else
