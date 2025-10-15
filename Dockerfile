@@ -33,4 +33,5 @@ ENV WEBHOOK_URL=https://srv-d3l3cqr3fgac73a8n7e0/
 EXPOSE 5678
 
 # Jalankan n8n agar tetap hidup (Render tidak auto-shutdown)
-CMD ["sh", "-c", "n8n start --tunnel"]
+CMD ["sh", "-c", "n8n start"]
+
