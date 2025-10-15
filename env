@@ -1,7 +1,38 @@
+#####################################
+# 🌐 n8n Core Configuration
+#####################################
 N8N_ENCRYPTION_KEY=isi_kuncimu_yang_rahasia
 N8N_BASIC_AUTH_USER=admin
 N8N_BASIC_AUTH_PASSWORD=passkuat
-WEBHOOK_URL=https://srv-d3l3cqr3fgac73a8n7e0/
 GENERIC_TIMEZONE=Asia/Jakarta
 EXECUTIONS_PROCESS=main
 N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
+# Wajib di Render: listen ke semua host dan port default
+N8N_HOST=0.0.0.0
+N8N_PORT=5678
+NODE_ENV=production
+
+# Untuk webhook n8n
+WEBHOOK_URL=https://srv-d3l3cqr3fgac73a8n7e0/
+
+#####################################
+# 🔄 GitHub Auto Backup (backup.sh)
+#####################################
+# Token GitHub (punya izin `repo`)
+GITHUB_TOKEN=ghp_yourtoken1234567890abcdef
+
+# Format: username/reponame
+GITHUB_REPO=khoirilagam88/n8n-render
+
+# Cabang yang digunakan (biasanya main)
+GITHUB_BRANCH=main
+
+#####################################
+# 🧩 Optional - Recommended
+#####################################
+# Aktifkan task runner untuk n8n versi terbaru
+N8N_RUNNERS_ENABLED=true
+
+# Izinkan node mengakses env var (kadang dibutuhkan oleh HTTP Request Node)
+N8N_BLOCK_ENV_ACCESS_IN_NODE=false
