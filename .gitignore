@@ -1,6 +1,5 @@
-# Backup lokal dan database
+# Abaikan folder backup dan file sensitif
 .n8n_backup/
-database.sqlite
-database_backup.sqlite
-n8nEventLog*.log
-config
+config/
+api_keys.json
+nodes/
