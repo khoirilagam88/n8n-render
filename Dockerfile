@@ -1,21 +1,15 @@
-# Gunakan Node image dengan bash/sh
-FROM node:20-bullseye-slim
-
-# Install n8n global
-RUN npm install -g n8n
+# Gunakan image resmi n8n
+FROM n8nio/n8n:latest
 
 # Set working directory
 WORKDIR /home/node/
 
-# Copy backup script
+# Salin script backup (tanpa chmod, agar Render tidak error)
 COPY backup.sh /home/node/backup.sh
-RUN chmod +x /home/node/backup.sh
 
-# Buat folder backup
+# Pastikan folder backup lokal ada
 RUN mkdir -p /home/node/.n8n_backup
 
-# Set environment variable agar n8n enforce permission
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-
-# Jalankan backup dan n8n
-CMD sh -c "/home/node/backup.sh && n8n start"
+# Jalankan backup.sh melalui NodeJS shell n8n saat start
+# Gunakan n8n start langsung setelah backup selesai
+CMD ["sh", "-c", "/home/node/backup.sh && n8n start"]
