@@ -1,14 +1,16 @@
 #!/bin/bash
 set -e
 
-# Backup path
 BACKUP_PATH="/home/node/.n8n_backup"
-
-# Create backup folder if not exists
 mkdir -p "$BACKUP_PATH"
 
-# Export workflows, ignore errors if none exist
-echo "Backing up all workflows..."
-n8n export:workflow --all --output="$BACKUP_PATH/workflows.json" || true
+echo "[DEBUG] Backup script starting at $(date)..."
 
-echo "Backup complete: $BACKUP_PATH/workflows.json"
+# Backup semua workflow aktif
+if n8n export:workflow --all --output="$BACKUP_PATH/workflows.json"; then
+    echo "[DEBUG] Backup completed successfully: $BACKUP_PATH/workflows.json"
+else
+    echo "[WARN] No workflows to backup or export failed, continuing..."
+fi
+
+echo "[DEBUG] Backup script finished at $(date)."
